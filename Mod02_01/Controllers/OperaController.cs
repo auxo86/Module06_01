@@ -162,5 +162,17 @@ namespace Mod02_01.Controllers
                          select o).Take(number).ToList();
             return View("Index", query);
         }
+
+        public ActionResult DetailsByTitle(string titile)
+        {
+            OperaContext context = new OperaContext();
+            Opera opera = context.Operas.FirstOrDefault<Opera>(o => o.Title == titile);
+            if (opera == null)
+            {
+                return HttpNotFound();
+            }
+
+            return View("Details", opera);
+        }
     }
 }
